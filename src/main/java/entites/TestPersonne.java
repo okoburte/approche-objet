@@ -8,5 +8,8 @@ public class TestPersonne {
         johnSmith.adresse = new AdressePostale(42, "Impasse des oliviers",34082, "Montpellier");
 
         Personne sophieDupont = new Personne("Dupont", "Sophie", new AdressePostale(144, "Allée du professeur Mac",69210, "Lyon"));
+
+        Personne adamConnor = new Personne("Connor", "Adam");
+        adamConnor.setAdresse(new AdressePostale(1400, "Boulevard du petit biscuit", 34090, "Montpellier"));
     }
 }
