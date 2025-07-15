@@ -4,22 +4,9 @@ import entites2.Personne;
 
 public class TestPersonne {
     public static void main(String[] args) {
-        Personne johnSmith = new Personne();
-        johnSmith.nom = "Smith";
-        johnSmith.prenom = "John";
-        johnSmith.adresse = new AdressePostale();
-        johnSmith.adresse.numero = 42;
-        johnSmith.adresse.libelle = "Impasse des oliviers";
-        johnSmith.adresse.codePostale = 34080;
-        johnSmith.adresse.ville = "Montpellier";
+        Personne johnSmith = new Personne("Smith", "John");
+        johnSmith.adresse = new AdressePostale(42, "Impasse des oliviers",34082, "Montpellier");
 
-        Personne sophieDupont = new Personne();
-        sophieDupont.nom = "Dupont";
-        sophieDupont.prenom = "Sophie";
-        sophieDupont.adresse = new AdressePostale();
-        sophieDupont.adresse.numero = 144;
-        sophieDupont.adresse.libelle = "Allée du professeur Mac";
-        sophieDupont.adresse.codePostale = 69210;
-        sophieDupont.adresse.ville = "Lyon";
+        Personne sophieDupont = new Personne("Dupont", "Sophie", new AdressePostale(144, "Allée du professeur Mac",69210, "Lyon"));
     }
 }
