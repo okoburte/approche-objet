@@ -15,6 +15,6 @@ public class Rond {
     }
 
     public void affiche(){
-        System.out.println(toString());
+        System.out.println(this);
     }
 }

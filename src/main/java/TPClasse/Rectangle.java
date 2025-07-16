@@ -29,7 +29,7 @@ public class Rectangle {
 
     @Override
     public String toString() {
-        return "[RECT "
+        return "[" + getType() + " "
                 + getPointBasGauche().toString()
                 + getPointBasDroite().toString()
                 + getPointHautGauche().toString()
@@ -38,6 +38,10 @@ public class Rectangle {
     }
 
     public void affiche(){
-        System.out.println(toString());
+        System.out.println(this);
+    }
+
+    protected String getType(){
+        return "RECTANGLE";
     }
 }
