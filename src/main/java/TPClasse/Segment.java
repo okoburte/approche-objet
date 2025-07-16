@@ -1,6 +1,6 @@
 package TPClasse;
 
-public class Segment extends Figure implements Surfacable{
+public class Segment extends Figure{
     Point startingPoint;
     int lenght;
     boolean horizontal;
@@ -29,10 +29,5 @@ public class Segment extends Figure implements Surfacable{
     @Override
     protected String getType() {
         return "SEGMENT";
-    }
-
-    @Override
-    public double surface() {
-        return lenght;
     }
 }

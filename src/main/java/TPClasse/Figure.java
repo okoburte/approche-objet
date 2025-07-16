@@ -1,6 +1,6 @@
 package TPClasse;
 
-public abstract class Figure implements Surfacable {
+public abstract class Figure{
     public static final int NB_FIGURE_TYPE = 4;
 
     public void affiche(){

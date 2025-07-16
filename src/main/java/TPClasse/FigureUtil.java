@@ -1,5 +1,7 @@
 package TPClasse;
 
+import java.util.function.Function;
+
 public class FigureUtil {
     public static Rond getRandomRond(int maxX, int maxY, int maxRadius) {
         return new Rond(getRandomPoint(maxX, maxY), (int)Math.ceil(Math.random() * maxRadius));
@@ -23,14 +25,21 @@ public class FigureUtil {
 
     static Figure getRandomFigure(int maxX, int maxY, int maxLength, int maxHeight){
         switch ((int)Math.ceil(Math.random() * Figure.NB_FIGURE_TYPE)){
+            case Surfacable.NB_SURFACABLE+1:
+                return getRandomSegment(maxX, maxY, maxLength);
+            default:
+                return (Figure) getRandomSurfacable(maxX, maxY, maxLength, maxHeight);
+        }
+    }
+
+    static Surfacable getRandomSurfacable(int maxX, int maxY, int maxLength, int maxHeight){
+        switch ((int)Math.ceil(Math.random() * Surfacable.NB_SURFACABLE)){
             case 1:
                 return getRandomRond(maxX, maxY, maxLength);
             case 2:
                 return getRandomRectangle(maxX, maxY, maxLength, maxHeight);
             case 3:
                 return getRandomCarre(maxX, maxY, maxLength);
-            case 4:
-                return getRandomSegment(maxX, maxY, maxLength);
             default:
                 return getRandomRectangle(maxX, maxY, maxLength, maxHeight);
         }
