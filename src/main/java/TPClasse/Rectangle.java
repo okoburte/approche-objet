@@ -44,4 +44,17 @@ public class Rectangle {
     protected String getType(){
         return "RECTANGLE";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!this.getClass().isAssignableFrom(obj.getClass()) && !obj.getClass().isAssignableFrom(this.getClass())) {
+            System.out.println("not same class");
+            return false;
+        }
+        Rectangle compareRect = (Rectangle) obj;
+        return getPointBasGauche().equals(compareRect.getPointBasGauche())
+                && getPointBasDroite().equals(compareRect.getPointBasDroite())
+                && getPointHautGauche().equals(compareRect.getPointHautGauche())
+                && getPointHautDroite().equals(compareRect.getPointHautDroite()) ;
+    }
 }

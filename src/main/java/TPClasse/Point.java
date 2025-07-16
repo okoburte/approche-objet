@@ -29,4 +29,10 @@ public class Point {
     public String toString() {
         return "[" + x + ";" + y + "]";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Point comparePoint = (Point) obj;
+        return (x == comparePoint.x) && (y == comparePoint.y);
+    }
 }
