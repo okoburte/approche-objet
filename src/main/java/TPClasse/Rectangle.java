@@ -48,7 +48,6 @@ public class Rectangle {
     @Override
     public boolean equals(Object obj) {
         if(!this.getClass().isAssignableFrom(obj.getClass()) && !obj.getClass().isAssignableFrom(this.getClass())) {
-            System.out.println("not same class");
             return false;
         }
         Rectangle compareRect = (Rectangle) obj;
