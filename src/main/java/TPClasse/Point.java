@@ -32,7 +32,15 @@ public class Point {
 
     @Override
     public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(obj == null || !getClass().isAssignableFrom(obj.getClass())) return false;
         Point comparePoint = (Point) obj;
         return (x == comparePoint.x) && (y == comparePoint.y);
+    }
+
+    static public double getDistance(Point p1, Point p2){
+        int difX = Math.abs(p1.getX() - p2.getX());
+        int difY = Math.abs(p1.getY() - p2.getY());
+        return Math.sqrt((difX*difX) + (difY*difY));
     }
 }

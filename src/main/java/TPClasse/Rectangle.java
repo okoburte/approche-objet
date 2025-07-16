@@ -1,7 +1,10 @@
 package TPClasse;
 
-public class Rectangle {
+import java.util.Arrays;
+
+public class Rectangle extends Figure {
     private Point point;
+    private Point[] points = new Point[4];
     private int x;
     private int y;
 
@@ -9,36 +12,35 @@ public class Rectangle {
         this.point = point;
         this.x = x;
         this.y = y;
+        setPoints();
     }
 
-    Point getPointBasGauche(){
-        return point;
+    void setPoints(){
+        for (int i = 0; i < points.length; i++) {
+            int x = point.getX();
+            int y = point.getY();
+            if(i%2 != 0) x += this.x;
+            if(i >= 2) y += this.y;
+            points[i] = new Point(x, y);
+        }
     }
 
-    Point getPointBasDroite(){
-        return new Point(point.getX() + x, point.getY());
-    }
-
-    Point getPointHautGauche(){
-        return new Point(point.getX(), point.getY() + y);
-    }
-
-    Point getPointHautDroite(){
-        return new Point(point.getX() + x, point.getY() + y);
+    Point[] getPoints(){
+        return points;
     }
 
     @Override
     public String toString() {
         return "[" + getType() + " "
-                + getPointBasGauche().toString()
-                + getPointBasDroite().toString()
-                + getPointHautGauche().toString()
-                + getPointHautDroite().toString()
+                + points[0].toString()
+                + points[1].toString()
+                + points[2].toString()
+                + points[3].toString()
                 + "]";
     }
 
-    public void affiche(){
-        System.out.println(this);
+    public Point getPoint() {
+        return point;
     }
 
     protected String getType(){
@@ -47,13 +49,20 @@ public class Rectangle {
 
     @Override
     public boolean equals(Object obj) {
-        if(!this.getClass().isAssignableFrom(obj.getClass()) && !obj.getClass().isAssignableFrom(this.getClass())) {
+        if(this == obj) return true;
+        if(obj == null || (!getClass().isAssignableFrom(obj.getClass()) && !obj.getClass().isAssignableFrom(getClass()))) {
             return false;
         }
-        Rectangle compareRect = (Rectangle) obj;
-        return getPointBasGauche().equals(compareRect.getPointBasGauche())
-                && getPointBasDroite().equals(compareRect.getPointBasDroite())
-                && getPointHautGauche().equals(compareRect.getPointHautGauche())
-                && getPointHautDroite().equals(compareRect.getPointHautDroite()) ;
+
+        return Arrays.equals(points, ((Rectangle) obj).getPoints());
+    }
+
+    @Override
+    public double surface() {
+        return x*y;
+    }
+
+    public double getDiagonal(){
+        return Point.getDistance(points[0], points[3]);
     }
 }

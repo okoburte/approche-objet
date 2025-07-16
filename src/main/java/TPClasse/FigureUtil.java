@@ -16,4 +16,23 @@ public class FigureUtil {
     static Point getRandomPoint(int maxX, int maxY){
         return new Point((int)Math.ceil(Math.random() * maxX), (int)Math.ceil(Math.random() * maxY));
     }
+
+    public static Segment getRandomSegment(int maxX, int maxY, int maxLength) {
+        return new Segment(getRandomPoint(maxX, maxY), (int)Math.ceil(Math.random() * maxLength), Math.random()>0.5);
+    }
+
+    static Figure getRandomFigure(int maxX, int maxY, int maxLength, int maxHeight){
+        switch ((int)Math.ceil(Math.random() * Figure.NB_FIGURE_TYPE)){
+            case 1:
+                return getRandomRond(maxX, maxY, maxLength);
+            case 2:
+                return getRandomRectangle(maxX, maxY, maxLength, maxHeight);
+            case 3:
+                return getRandomCarre(maxX, maxY, maxLength);
+            case 4:
+                return getRandomSegment(maxX, maxY, maxLength);
+            default:
+                return getRandomRectangle(maxX, maxY, maxLength, maxHeight);
+        }
+    }
 }
