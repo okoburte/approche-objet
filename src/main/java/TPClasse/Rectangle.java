@@ -1,6 +1,7 @@
 package TPClasse;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Rectangle extends Figure implements Surfacable{
     private Point point;
@@ -25,8 +26,8 @@ public class Rectangle extends Figure implements Surfacable{
         }
     }
 
-    public Point[] getPoints(){
-        return points;
+    public List<Point> getPoints(){
+        return List.of(points);
     }
 
     @Override
@@ -37,6 +38,15 @@ public class Rectangle extends Figure implements Surfacable{
                 + points[2].toString()
                 + points[3].toString()
                 + "]";
+    }
+
+    @Override
+    public boolean couvre(Point point) {
+        if(points[0].getX() <= point.getX() && points[0].getX() + x >= point.getX() && points[0].getY() == point.getY()) return true;
+        if(points[0].getY() <= point.getY() && points[0].getY() + y >= point.getY() && points[0].getY() == point.getY()) return true;
+        if(points[3].getX() <= point.getX() && points[3].getX() + x >= point.getX() && points[0].getX() == point.getX()) return true;
+        if(points[3].getY() <= point.getY() && points[3].getY() + y >= point.getY() && points[0].getX() == point.getX()) return true;
+        return false;
     }
 
     public Point getPoint() {
@@ -53,8 +63,7 @@ public class Rectangle extends Figure implements Surfacable{
         if(obj == null || (!getClass().isAssignableFrom(obj.getClass()) && !obj.getClass().isAssignableFrom(getClass()))) {
             return false;
         }
-
-        return Arrays.equals(points, ((Rectangle) obj).getPoints());
+        return getPoints().containsAll(((Rectangle)obj).getPoints());
     }
 
     @Override

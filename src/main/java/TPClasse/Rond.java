@@ -1,5 +1,9 @@
 package TPClasse;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 public class Rond extends Figure implements Surfacable{
     private Point point;
     private int r;
@@ -12,6 +16,11 @@ public class Rond extends Figure implements Surfacable{
     @Override
     public String toString() {
         return "[" + getType() + " " + point.toString() + ", " + r + "]";
+    }
+
+    @Override
+    public boolean couvre(Point point) {
+        return Point.getDistance(this.point, point) == r;
     }
 
     public Point getPoint(){
@@ -32,8 +41,10 @@ public class Rond extends Figure implements Surfacable{
     }
 
     @Override
-    public Point[] getPoints() {
-        return new Point[]{point};
+    public List<Point> getPoints() {
+        List<Point> points = new ArrayList<>();
+        points.add(point);
+        return points;
     }
 
     @Override

@@ -1,5 +1,8 @@
 package TPClasse;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Segment extends Figure{
     Point startingPoint;
     int lenght;
@@ -22,6 +25,16 @@ public class Segment extends Figure{
     }
 
     @Override
+    public boolean couvre(Point point) {
+        if(horizontal){
+            return point.getX() >= startingPoint.getX() && point.getX() <= startingPoint.getX() + lenght;
+        }
+        else {
+            return point.getY() >= startingPoint.getY() && point.getY() <= startingPoint.getY() + lenght;
+        }
+    }
+
+    @Override
     public Point getPoint() {
         return startingPoint;
     }
@@ -40,8 +53,11 @@ public class Segment extends Figure{
     }
 
     @Override
-    public Point[] getPoints() {
-        return new Point[]{startingPoint, getEndPoint()};
+    public List<Point> getPoints() {
+        List<Point> points = new ArrayList<>();
+        points.add(startingPoint);
+        points.add(getEndPoint());
+        return points;
     }
 
     @Override
