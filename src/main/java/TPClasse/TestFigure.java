@@ -1,5 +1,7 @@
 package TPClasse;
 
+import java.util.Arrays;
+
 public class TestFigure {
     public static void main(String[] args) {
         Carre carre2 = FigureUtil.getRandomCarre(20, 20, 10);
@@ -28,5 +30,8 @@ public class TestFigure {
         System.out.println("La surface de rond1 = " + rond1.surface());
         System.out.println("La diagonale de carre2 = " + carre2.getDiagonal());
         System.out.println("La diagonale de rectangle2 = " + rectangle2.getDiagonal());
+
+        System.out.println("liste des points de carre2, rectangle2, rond1, segment1, figure1 :");
+        System.out.println(Arrays.toString(FigureUtil.getPoints(carre2, rectangle2, rond1, segment1, figure1)));
     }
 }

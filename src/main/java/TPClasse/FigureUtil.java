@@ -1,5 +1,7 @@
 package TPClasse;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 public class FigureUtil {
@@ -43,5 +45,15 @@ public class FigureUtil {
             default:
                 return getRandomRectangle(maxX, maxY, maxLength, maxHeight);
         }
+    }
+
+    static Point[] getPoints(Figure... figures){
+        List<Point> points = new ArrayList<Point>();
+        for(Figure figure : figures){
+            for(Point point : figure.getPoints()){
+                points.add(point);
+            }
+        }
+        return points.toArray(new Point[0]);
     }
 }

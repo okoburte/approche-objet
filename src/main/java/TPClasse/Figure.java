@@ -9,4 +9,5 @@ public abstract class Figure{
 
     public abstract Point getPoint();
     protected abstract String getType();
+    public abstract  Point[] getPoints();
 }

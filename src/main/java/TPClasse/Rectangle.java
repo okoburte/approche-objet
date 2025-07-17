@@ -25,7 +25,7 @@ public class Rectangle extends Figure implements Surfacable{
         }
     }
 
-    Point[] getPoints(){
+    public Point[] getPoints(){
         return points;
     }
 
