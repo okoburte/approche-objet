@@ -4,22 +4,27 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Rectangle extends Figure implements Surfacable{
-    private Point point;
     private Point[] points = new Point[4];
     private int x;
     private int y;
 
-    Rectangle(Point point, int x, int y){
-        this.point = point;
+    Rectangle(Point point, int x, int y) throws DessinHorsLimiteException {
+        super.startingPoint = point;
         this.x = x;
         this.y = y;
         setPoints();
+        super.couleur = Couleur.getCouleurDefault();
     }
 
-    void setPoints(){
+    Rectangle(Point point, int x, int y, Couleur couleur) throws DessinHorsLimiteException {
+        this(point, x, y);
+        super.couleur = couleur;
+    }
+
+    void setPoints() throws DessinHorsLimiteException {
         for (int i = 0; i < points.length; i++) {
-            int x = point.getX();
-            int y = point.getY();
+            int x = startingPoint.getX();
+            int y = startingPoint.getY();
             if(i%2 != 0) x += this.x;
             if(i >= 2) y += this.y;
             points[i] = new Point(x, y);
@@ -33,6 +38,7 @@ public class Rectangle extends Figure implements Surfacable{
     @Override
     public String toString() {
         return "[" + getType() + " "
+                + couleur.toString() + " "
                 + points[0].toString()
                 + points[1].toString()
                 + points[2].toString()
@@ -49,8 +55,18 @@ public class Rectangle extends Figure implements Surfacable{
         return false;
     }
 
+    @Override
+    public double distanceOrigine() {
+        return getDiagonal()/2;
+    }
+
+    @Override
+    public String sauvegarde() {
+        return x + "," + y;
+    }
+
     public Point getPoint() {
-        return point;
+        return startingPoint;
     }
 
     protected String getType(){
@@ -63,7 +79,9 @@ public class Rectangle extends Figure implements Surfacable{
         if(obj == null || (!getClass().isAssignableFrom(obj.getClass()) && !obj.getClass().isAssignableFrom(getClass()))) {
             return false;
         }
-        return getPoints().containsAll(((Rectangle)obj).getPoints());
+
+        Rectangle compareRectangle = (Rectangle) obj;
+        return getPoints().containsAll(((Rectangle)obj).getPoints()) && getCouleur().equals(compareRectangle.getCouleur());
     }
 
     @Override
@@ -73,5 +91,13 @@ public class Rectangle extends Figure implements Surfacable{
 
     public double getDiagonal(){
         return Point.getDistance(points[0], points[3]);
+    }
+
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
     }
 }

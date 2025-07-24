@@ -51,6 +51,16 @@ public class Triangle extends Figure implements Surfacable {
     }
 
     @Override
+    public double distanceOrigine() {
+        return Math.min(Point.getDistance(points[0], points[1]), Point.getDistance(points[0], points[2]));
+    }
+
+    @Override
+    public String sauvegarde() {
+        return "";
+    }
+
+    @Override
     public double surface() {
         double  surface = 0;
         for (int i = 0; i < points.length; i++) {

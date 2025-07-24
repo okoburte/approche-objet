@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Segment extends Figure{
-    Point startingPoint;
     int lenght;
     boolean horizontal;
 
     Segment (Point point, int lenght, boolean horizontal){
-        this.startingPoint = point;
+        super.startingPoint = point;
         this.lenght = lenght;
         this.horizontal = horizontal;
+        super.couleur = Couleur.getCouleurDefault();
+    }
+
+    Segment (Point point, int lenght, boolean horizontal, Couleur couleur){
+        this(point, lenght, horizontal);
+        super.couleur = couleur;
     }
 
     @Override
@@ -20,8 +25,13 @@ public class Segment extends Figure{
         int y = startingPoint.getY();
         if(horizontal) x += lenght;
         else y += lenght;
-        Point endPoint = new Point(x, y);
-        return "[" + getType() + " " + startingPoint.toString() + " à " + endPoint.toString();
+        Point endPoint = null;
+        try {
+            endPoint = new Point(x, y);
+        } catch (DessinHorsLimiteException e) {
+            throw new RuntimeException(e);
+        }
+        return "[" + getType() + " " + couleur.toString() + " " + startingPoint.toString() + " à " + endPoint.toString();
     }
 
     @Override
@@ -35,11 +45,21 @@ public class Segment extends Figure{
     }
 
     @Override
+    public double distanceOrigine() {
+        return lenght;
+    }
+
+    @Override
+    public String sauvegarde() {
+        return lenght + "," + horizontal;
+    }
+
+    @Override
     public Point getPoint() {
         return startingPoint;
     }
 
-    public Point getEndPoint() {
+    public Point getEndPoint() throws DessinHorsLimiteException {
         int x = startingPoint.getX();
         int y = startingPoint.getY();
         if(horizontal) x += lenght;
@@ -53,7 +73,7 @@ public class Segment extends Figure{
     }
 
     @Override
-    public List<Point> getPoints() {
+    public List<Point> getPoints() throws DessinHorsLimiteException {
         List<Point> points = new ArrayList<>();
         points.add(startingPoint);
         points.add(getEndPoint());
@@ -62,7 +82,12 @@ public class Segment extends Figure{
 
     @Override
     public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(obj == null || (!getClass().isAssignableFrom(obj.getClass()) && !obj.getClass().isAssignableFrom(getClass()))) {
+            return false;
+        }
+
         Segment compareSegment = (Segment) obj;
-        return startingPoint.equals(compareSegment.startingPoint) &&  lenght == compareSegment.lenght &&  horizontal == compareSegment.horizontal;
+        return startingPoint.equals(compareSegment.startingPoint) &&  lenght == compareSegment.lenght &&  horizontal == compareSegment.horizontal && getCouleur().equals(compareSegment.getCouleur());
     }
 }

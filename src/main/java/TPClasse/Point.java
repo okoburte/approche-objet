@@ -12,7 +12,8 @@ public class Point {
         this.y = INIT_Y;
     }
 
-    Point(int x, int y){
+    Point(int x, int y) throws DessinHorsLimiteException {
+        if(x < 0 || y < 0 || x > 99 || y > 99) throw new DessinHorsLimiteException("Echec creation de point, coordonnée hors limite");
         this.x = x;
         this.y = y;
     }
